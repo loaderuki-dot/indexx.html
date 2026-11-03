@@ -9,6 +9,31 @@
 </head>
 <body id="home">
 
+  <!-- Auth Modal (Login / Register) -->
+  <div id="authModal" class="modal-overlay">
+    <div class="modal-card">
+      <h2 id="authTitle">Tizimga Kirish</h2>
+      <p id="authSubtitle">Davom etish uchun akkountingizga kiring</p>
+      
+      <form id="authForm">
+        <div class="form-group">
+          <label for="username">Foydalanuvchi nomi (Login)</label>
+          <input type="text" id="username" placeholder="Masalan: kry0n" required>
+        </div>
+        <div class="form-group">
+          <label for="password">Parol</label>
+          <input type="password" id="password" placeholder="******" required>
+        </div>
+        <button type="submit" id="authSubmitBtn" class="btn primary full-width">Kirish</button>
+      </form>
+      
+      <p class="auth-toggle-text">
+        <span id="authToggleQuestion">Akkountingiz yo'qmi?</span> 
+        <a href="#" id="authToggleBtn">Ro'yxatdan o'tish</a>
+      </p>
+    </div>
+  </div>
+
   <!-- Header -->
   <header class="header">
     <nav class="nav container" aria-label="Asosiy menyu">
@@ -20,6 +45,15 @@
         <a href="#music">Musiqa</a>
         <a href="#contact">Aloqa</a>
       </div>
+      
+      <!-- User Info & Activity Status -->
+      <div class="user-status-bar">
+        <div class="live-clock" id="liveClock">00:00:00</div>
+        <div class="user-profile hidden" id="userProfile">
+          <span id="userDisplayName">Foydalanuvchi</span>
+          <button id="logoutBtn" class="btn-sm secondary">Chiqish</button>
+        </div>
+      </div>
     </nav>
   </header>
 
@@ -28,7 +62,10 @@
     <!-- Hero Section -->
     <section class="hero">
       <div class="container hero-content">
-        <span class="badge">● Biz ishni endi boshladik</span>
+        <div class="status-badges">
+          <span class="badge">● Biz ishni endi boshladik</span>
+          <span class="badge activity-badge" id="lastActiveBadge">Aktivlik: Kirilmagan</span>
+        </div>
         <h1>Qiziqishdan boshla.<br><span>IT bilan rivojlan.</span></h1>
         <p>O‘zbekcha videolar, kichik mashqlar va o‘qish uchun sokin muhit. Birinchi qadamingni bugun tashla.</p>
         <div class="hero-buttons">
