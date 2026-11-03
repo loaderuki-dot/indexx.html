@@ -32,7 +32,87 @@ body {
   padding: 0 20px;
 }
 
-/* Header */
+.hidden {
+  display: none !important;
+}
+
+/* Modal Window (Auth) */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(15, 23, 42, 0.85);
+  backdrop-filter: blur(8px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+  opacity: 1;
+  transition: var(--transition);
+}
+
+.modal-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  padding: 30px;
+  border-radius: 16px;
+  width: 100%;
+  max-width: 400px;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
+}
+
+.modal-card h2 {
+  font-size: 1.8rem;
+  margin-bottom: 5px;
+}
+
+.modal-card p {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  margin-bottom: 20px;
+}
+
+.form-group {
+  margin-bottom: 15px;
+  text-align: left;
+}
+
+.form-group label {
+  display: block;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-bottom: 5px;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 10px 14px;
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+  background: var(--bg-color);
+  color: var(--text-color);
+  font-size: 1rem;
+}
+
+.full-width {
+  width: 100%;
+  margin-top: 10px;
+}
+
+.auth-toggle-text {
+  margin-top: 15px;
+  text-align: center;
+}
+
+.auth-toggle-text a {
+  color: var(--accent-color);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+/* Header & Live Clock */
 .header {
   position: sticky;
   top: 0;
@@ -76,10 +156,39 @@ body {
   color: var(--accent-color);
 }
 
-/* Sections */
+.user-status-bar {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.live-clock {
+  font-family: monospace;
+  background: var(--card-bg);
+  padding: 6px 12px;
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+  color: var(--accent-color);
+  font-weight: bold;
+}
+
+.user-profile {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Sections & Badges */
 .section {
   padding: 80px 0;
   border-bottom: 1px solid var(--border-color);
+}
+
+.status-badges {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 15px;
 }
 
 .section-badge, .badge {
@@ -90,9 +199,13 @@ body {
   background: rgba(56, 189, 248, 0.1);
   padding: 6px 12px;
   border-radius: 20px;
-  margin-bottom: 15px;
   text-transform: uppercase;
   letter-spacing: 1px;
+}
+
+.activity-badge {
+  color: #10b981;
+  background: rgba(16, 185, 129, 0.1);
 }
 
 h2 {
@@ -151,6 +264,13 @@ h2 {
   border: none;
 }
 
+.btn-sm {
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
 .btn.primary {
   background-color: var(--accent-color);
   color: var(--bg-color);
@@ -160,22 +280,21 @@ h2 {
   background-color: var(--accent-hover);
 }
 
-.btn.secondary {
+.btn.secondary, .btn-sm.secondary {
   background-color: var(--card-bg);
   color: var(--text-color);
   border: 1px solid var(--border-color);
 }
 
-.btn.secondary:hover {
+.btn.secondary:hover, .btn-sm.secondary:hover {
   border-color: var(--accent-color);
 }
 
-/* Steps Grid */
-.steps-grid {
+/* Grids & Cards */
+.steps-grid, .lessons-grid, .projects-grid, .music-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 20px;
-  margin-top: 40px;
 }
 
 .step-card, .project-card, .music-card, .quiz-card, .goals-box, .timer-box {
@@ -194,27 +313,6 @@ h2 {
   margin-bottom: 10px;
 }
 
-.step-card h3, .project-card h3 {
-  margin-bottom: 10px;
-}
-
-.step-card p, .project-card p {
-  color: var(--text-muted);
-}
-
-/* Lessons & Projects Grid */
-.lessons-grid, .projects-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 20px;
-}
-
-.storage-note {
-  margin-top: 20px;
-  color: var(--text-muted);
-  font-size: 0.85rem;
-}
-
 /* Focus Section */
 .focus-grid {
   display: grid;
@@ -227,7 +325,7 @@ h2 {
     grid-template-columns: 1fr;
   }
   .nav-links {
-    display: none; /* Sadnalashtirish uchun, xohlasangiz mobil menyu qilsa bo'ladi */
+    display: none;
   }
 }
 
@@ -278,19 +376,11 @@ h2 {
   color: var(--text-muted);
 }
 
-/* Music */
-.music-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 20px;
-}
-
 .music-card audio {
   width: 100%;
   margin-top: 15px;
 }
 
-/* Contact */
 .contact {
   text-align: center;
 }
@@ -302,7 +392,6 @@ h2 {
   margin-top: 25px;
 }
 
-/* Footer */
 .footer {
   padding: 30px 0;
   text-align: center;
