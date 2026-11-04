@@ -1,225 +1,31 @@
 <!DOCTYPE html>
 <html lang="uz">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Nexorya — IT va Dasturlashni O'rganish</title>
-  <meta name="description" content="O'zbek tilida IT va dasturlashni noldan o'rganing. Video darslar, testlar va foydali manbalar.">
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IT Quiz Machine Pro</title>
+    <link rel="stylesheet" href="style.css">
 </head>
-<body id="home">
+<body>
+    <header>
+        <div class="logo">⚡ IT Machine Quiz</div>
+        <div class="stats">
+            <div class="stat-badge">XP: <span id="xp-count">0</span></div>
+            <div class="stat-badge">Level: <span id="level-count">1</span></div>
+        </div>
+    </header>
 
-  <!-- Auth Modal (Login / Register) -->
-  <div id="authModal" class="modal-overlay">
-    <div class="modal-card">
-      <h2 id="authTitle">Tizimga Kirish</h2>
-      <p id="authSubtitle">Davom etish uchun akkountingizga kiring</p>
-      
-      <form id="authForm">
-        <div class="form-group">
-          <label for="username">Foydalanuvchi nomi (Login)</label>
-          <input type="text" id="username" placeholder="Masalan: kry0n" required>
-        </div>
-        <div class="form-group">
-          <label for="password">Parol</label>
-          <input type="password" id="password" placeholder="******" required>
-        </div>
-        <button type="submit" id="authSubmitBtn" class="btn primary full-width">Kirish</button>
-      </form>
-      
-      <p class="auth-toggle-text">
-        <span id="authToggleQuestion">Akkountingiz yo'qmi?</span> 
-        <a href="#" id="authToggleBtn">Ro'yxatdan o'tish</a>
-      </p>
-    </div>
-  </div>
-
-  <!-- Header -->
-  <header class="header">
-    <nav class="nav container" aria-label="Asosiy menyu">
-      <a href="#home" class="logo">Nexo<span>rya</span></a>
-      <div class="nav-links">
-        <a href="#lessons">Darslar</a>
-        <a href="#quiz">Test</a>
-        <a href="#focus">Fokus</a>
-        <a href="#music">Musiqa</a>
-        <a href="#contact">Aloqa</a>
-      </div>
-      
-      <!-- User Info & Activity Status -->
-      <div class="user-status-bar">
-        <div class="live-clock" id="liveClock">00:00:00</div>
-        <div class="user-profile hidden" id="userProfile">
-          <span id="userDisplayName">Foydalanuvchi</span>
-          <button id="logoutBtn" class="btn-sm secondary">Chiqish</button>
-        </div>
-      </div>
-    </nav>
-  </header>
-
-  <!-- Main Content -->
-  <main>
-    <!-- Hero Section -->
-    <section class="hero">
-      <div class="container hero-content">
-        <div class="status-badges">
-          <span class="badge">● Biz ishni endi boshladik</span>
-          <span class="badge activity-badge" id="lastActiveBadge">Aktivlik: Kirilmagan</span>
-        </div>
-        <h1>Qiziqishdan boshla.<br><span>IT bilan rivojlan.</span></h1>
-        <p>O‘zbekcha videolar, kichik mashqlar va o‘qish uchun sokin muhit. Birinchi qadamingni bugun tashla.</p>
-        <div class="hero-buttons">
-          <a href="#lessons" class="btn primary">O‘rganishni boshlash ↗</a>
-          <a href="#quiz" class="btn secondary">Bilimingni sinash</a>
-        </div>
-        <div class="hero-note">Katta raqamlar emas — haqiqiy qiziqishdan boshlaymiz.</div>
-      </div>
-    </section>
-
-    <!-- Steps Section -->
-    <section class="steps section">
-      <div class="container">
-        <span class="section-badge">QAYERDAN BOSHLAYMAN?</span>
-        <h2>Sening birinchi uch qadaming</h2>
-        <div class="steps-grid">
-          <article class="step-card">
-            <span>01</span>
-            <h3>Tomosha qil</h3>
-            <p>IT haqidagi bitta videoni tanla va yangi tushunchalarni yozib ol.</p>
-          </article>
-          <article class="step-card">
-            <span>02</span>
-            <h3>Amalda bajar</h3>
-            <p>Video ostidagi kichik vazifani bajar. Faqat ko‘rish bilan cheklanma.</p>
-          </article>
-          <article class="step-card">
-            <span>03</span>
-            <h3>Bilimingni tekshir</h3>
-            <p>Qisqa testdan o‘t va qaysi mavzuni qaytarishni aniqlab ol.</p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- Lessons Section -->
-    <section id="lessons" class="lessons section">
-      <div class="container">
-        <span class="section-badge">O‘ZBEKCHA KONTENT</span>
-        <h2>Video darslar</h2>
-        <p class="section-desc">Videoni tanla, mashqni bajar va ko‘rilganini belgilab qo‘y.</p>
+    <div class="container" id="quiz-app">
+        <h2 id="question-title">Tayyormisiz? IT bilimingizni sinab ko'ring!</h2>
+        <p id="question-desc" class="sub-text">Quyidagi kategoriyalardan birini tanlang va testni boshlang.</p>
         
-        <div class="lessons-grid" id="lessonsContainer">
-          <!-- Dinamik darslar script.js orqali qo'shiladi -->
+        <div class="options-grid" id="main-menu">
+            <button class="btn" onclick="startCategory('js')">JavaScript Testlar</button>
+            <button class="btn" onclick="startCategory('python')">Python Testlar</button>
+            <button class="btn" onclick="startCategory('cyber')">Kiberxavfsizlik Testlar</button>
         </div>
-        <p class="storage-note">Belgilar faqat shu brauzerda saqlanadi.</p>
-      </div>
-    </section>
-
-    <!-- Quiz Section -->
-    <section id="quiz" class="quiz section">
-      <div class="container">
-        <span class="section-badge">BILIMINGNI SINAB KO‘R</span>
-        <h2>IT bo‘yicha kichik test</h2>
-        <div class="quiz-card" id="quizContainer">
-          <!-- Testlar script.js orqali ishlaydi -->
-        </div>
-      </div>
-    </section>
-
-    <!-- Focus Section -->
-    <section id="focus" class="focus section">
-      <div class="container">
-        <span class="section-badge">O‘ZING UCHUN VAQT</span>
-        <h2>Intizom va fokus</h2>
-        <div class="focus-grid">
-          <!-- Kunlik maqsadlar -->
-          <div class="goals-box">
-            <h3>Bugungi maqsadlar</h3>
-            <div class="goal-input-group">
-              <input type="text" id="goalInput" placeholder="Yangi maqsad yozing...">
-              <button id="addGoalBtn" class="btn primary">Qo'shish</button>
-            </div>
-            <ul id="goalsList" class="goals-list"></ul>
-          </div>
-
-          <!-- Fokus taymeri -->
-          <div class="timer-box">
-            <h3>Fokus taymeri</h3>
-            <p>Bitta vazifani tanla. Qolganini vaqtincha chetga qo‘y.</p>
-            <div class="timer-display" id="timerDisplay">25:00</div>
-            <div class="timer-controls">
-              <button id="startTimer" class="btn primary">Boshlash</button>
-              <button id="pauseTimer" class="btn secondary">To'xtatish</button>
-              <button id="resetTimer" class="btn secondary">Qayta o'rnatish</button>
-            </div>
-            <p id="timerStatus" class="timer-status">Tayyormisan?</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Music Section -->
-    <section id="music" class="music section">
-      <div class="container">
-        <span class="section-badge">SEN TANLAGAN MUSIQALAR</span>
-        <h2>O‘qish uchun musiqa ♫</h2>
-        <p class="section-desc">Pleerni ochib, ijro tugmasini bos. Bir vaqtda bitta musiqani qo‘y.</p>
-        <div class="music-grid">
-          <div class="music-card">
-            <h3>Lo-Fi Focus Beats</h3>
-            <audio controls src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf756.mp3?filename=lofi-study-112191.mp3"></audio>
-          </div>
-          <div class="music-card">
-            <h3>Calm Ambient Coding</h3>
-            <audio controls src="https://cdn.pixabay.com/download/audio/2022/01/18/audio_d0a13f69d2.mp3?filename=chill-abstract-intention-12099.mp3"></audio>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Projects Idea Section -->
-    <section class="projects section">
-      <div class="container">
-        <h2>Kichik loyiha g‘oyalari</h2>
-        <div class="projects-grid">
-          <article class="project-card">
-            <h3>Shaxsiy sahifa</h3>
-            <p>O‘zing, qiziqishlaring va aloqa havolalaring bilan portfolio yarat.</p>
-          </article>
-          <article class="project-card">
-            <h3>Vazifalar ro‘yxati</h3>
-            <p>Vazifa qo‘shish va bajarilganini belgilash funksiyasini yoz.</p>
-          </article>
-          <article class="project-card">
-            <h3>IT viktorinasi</h3>
-            <p>O‘rganganlaringdan beshta savolli test tayyorla.</p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section id="contact" class="contact section">
-      <div class="container">
-        <h2>Birga rivojlanamiz.</h2>
-        <p>Taklifing, savoling yoki ishlamagan video bo‘lsa, yoz.</p>
-        <div class="social-links">
-          <a href="https://t.me/kry0n_1" rel="noopener noreferrer" target="_blank" class="btn primary">Telegram · @kry0n_1 ↗</a>
-          <a href="https://instagram.com/s2.lenix/" rel="noopener noreferrer" target="_blank" class="btn secondary">Instagram · @s2.lenix ↗</a>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <!-- Footer -->
-  <footer class="footer">
-    <div class="container footer-content">
-      <p>© <span id="currentYear">2026</span> Nexorya · ITni birga o‘rganamiz.</p>
-      <p class="footer-note">Progress va maqsadlar faqat shu brauzerda saqlanadi.</p>
-      <a href="#home" class="back-to-top">Tepaga ↑</a>
     </div>
-  </footer>
 
-  <script src="script.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
